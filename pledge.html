@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pledge & Donor Wall</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f2f1f1; /* Simple light background */
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Banner with background image + overlay */
+    .banner {
+      position: relative;
+      background: url('P K Kelkar Library A.jpg') center/cover no-repeat;
+      height: 450px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-shadow: 1px 1px 5px rgba(0,0,0,0.7);
+      padding: 0 20px;
+    }
+
+    /* Dark overlay over banner image */
+    .banner::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.5); /* semi-transparent overlay */
+      z-index: 0;
+    }
+
+    /* Banner content above overlay */
+    .banner h1,
+    .banner p {
+      position: relative;
+      z-index: 1;
+      margin: 0;
+    }
+
+    .banner h1 {
+      font-size: 42px;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+
+    .banner p {
+      font-size: 18px;
+      color: #fff3f0;
+    }
+
+    .buttons {
+      margin: 20px 0;
+    }
+
+    .btn {
+            background: #B04B34;
+            color: white;
+            padding: 22px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 20px;
+            transition: 0.3s ease;
+        }
+    .btn:hover {
+      background: #932D20;
+    }
+
+    #totalPledges {
+      font-size: 18px;
+      margin-bottom: 15px;
+      color: #333;
+      font-weight: bold;
+    }
+
+    .pledge-wall {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 10px;
+      padding: 10px 20px 40px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .pledge-card {
+      background: white;
+      padding: 12px 10px;
+      border-radius: 6px;
+      box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+      font-size: 14px;
+      text-align: center;
+      border-left: 5px solid #B04B34;
+      transition: 0.3s ease;
+      word-wrap: break-word;
+    }
+
+    .pledge-card:hover {
+      background: #B04B34;
+      color: white;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Banner -->
+  <div class="banner">
+    <h1>Wall of Pledge</h1>
+    <p>Celebrating the generous spirit of our alumni and well-wishers</p>
+  </div>
+
+  <!-- Buttons -->
+  <div class="buttons">
+    <button class="btn" onclick="window.open('https://iitk.ac.in/dora/givingback/pledge/class-1999.php#mu-pledge', '_blank')">
+      Make a Pledge
+    </button>
+    <button class="btn" onclick="window.open('https://iitk.ac.in/dora/givingback/donate/1999-Batch-Fund', '_blank')">
+      Give Back Now
+    </button>
+  </div>
+
+  <!-- Total Counter -->
+  <div id="totalPledges">Total Pledge: 0</div>
+
+  <!-- Wall Display -->
+  <div id="pledgeWall" class="pledge-wall"></div>
+
+  <script>
+    const pledges = [];
+    const names = [
+      "Abhay Gupta", "Amit Shukla", "Anuj Kumar", "Ashish Anand", "Deepak Sharma",
+      "Gaurav Agarwal", "Jitendra Kumar", "Kunal Kunal", "Mahendra Yadav", "Priya Jain",
+      "Nikita Verma", "Rajeev Ranjan", "Sneha Singh", "Tarun Mehta", "Vivek Bhargava",
+      "Neha Sinha", "Pooja Joshi", "Rohit Rathi", "Sandeep Chauhan", "Vinay Thakur",
+      "Harshita Sharma", "Saurabh Agarwal", "Swati Yadav", "Megha Mishra", "Aditya Verma",
+      "Manish Yadav", "Preeti Tiwari", "Yashvardhan Singh", "Anjali Chauhan", "Lakshay Jain"
+    ];
+  
+    // Generate 100 pledges with random names and dates
+    for (let i = 0; i < 100; i++) {
+      let randomDate = `2024-${String(Math.floor(Math.random() * 12) + 1).padStart(2, '0')}-${String(Math.floor(Math.random() * 28) + 1).padStart(2, '0')}`;
+      let randomName = names[Math.floor(Math.random() * names.length)];
+      pledges.push({ name: randomName, date: randomDate });
+    }
+  
+    function renderPledges() {
+      const pledgeWall = document.getElementById('pledgeWall');
+      pledgeWall.innerHTML = "";
+      pledges.forEach(pledge => {
+        const card = document.createElement('div');
+        card.classList.add('pledge-card');
+        card.innerHTML = `<strong>${pledge.name}</strong><br><span>${pledge.date}</span>`;
+        pledgeWall.appendChild(card);
+      });
+      document.getElementById('totalPledges').textContent = `Total Pledge: ${pledges.length}`;
+    }
+  
+    renderPledges();
+  </script>
+  
+</body>
+</html>
